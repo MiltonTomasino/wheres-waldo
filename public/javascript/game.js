@@ -1,4 +1,5 @@
 const imageContainer = document.querySelector(".image-container");
+const gameStart = document.querySelector(".start-game");
 
 const waldoCoordinates = {
     x1: 1859 / 2560,
@@ -7,7 +8,7 @@ const waldoCoordinates = {
     y2: 790 / 1440
 }
 
-function getCoordinates(event) {
+async function getCoordinates(event) {
     const rect = event.target.getBoundingClientRect();
     const clickX = event.clientX - rect.left;
     const clickY = event.clientY - rect.top;
@@ -22,7 +23,20 @@ function getCoordinates(event) {
         pctY >= waldoCoordinates.y1 && pctY <= waldoCoordinates.y2
     ) {
         console.log("You found Waldo!");
+        await fetch("/game/end", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"}
+        });
     } else {
         console.log("Try again!");
     }
 }
+
+gameStart.addEventListener("click", async (e) => {
+    e.preventDefault();
+    await fetch("/game/start", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"}
+        });
+    imageContainer.style.display = "block";
+})
