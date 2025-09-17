@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+.image-container {
+    /* display: none; */
+}
+
 img {
     max-width: 80%;
     height: auto;

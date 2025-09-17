@@ -1,6 +1,6 @@
 const express = require("express");
 const indexRouter = require("./routes/index");
-const waldoRouter = require("./routes/waldo");
+const gameRouter = require("./routes/game");
 
 const app = express();
 
@@ -10,7 +10,7 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 
 app.use("/", indexRouter);
-app.use("/waldo", waldoRouter);
+app.use("/game", gameRouter);
 
 app.listen(3000, () => {
     console.log("Server is running on port 3000");
