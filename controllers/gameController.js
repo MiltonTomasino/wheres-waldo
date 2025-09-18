@@ -1,7 +1,21 @@
-module.exports.getGamePage = (req, res) => {
+const { PrismaClient } = require("../generated/prisma");
+const prisma = new PrismaClient();
+
+module.exports.getGamePage = async (req, res) => {
     const { title } = req.query;
-    // console.log("Title: ", title);
-    res.render("game", { image: title, title: `${title}'s page` });
+    
+    const data = await prisma.fileInfo.findFirst({
+        where: {
+            name: {
+                equals: title,
+                mode: 'insensitive'
+            }
+        }
+    });
+
+    console.log("Data: ", data);
+    
+    res.render("game", { image: title, title: `${title}'s page`, file: data });
 }
 
 module.exports.startGame = (req, res) => {
@@ -15,5 +29,6 @@ module.exports.finishGame = (req, res) => {
 
     const elapsedTime = (Date.now() - start) / 1000;
 
+    req.session.totalTime = elapsedTime;
     res.json({ time: elapsedTime });
 }

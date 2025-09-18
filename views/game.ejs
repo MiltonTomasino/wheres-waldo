@@ -8,12 +8,14 @@
     <title><%= title %></title>
 </head>
 <body>
-    <h1>Waldo's page</h1>
+    <h1><%= file.name %>'s page</h1>
     <form action="/start">
         <button type="submit" class="start-game">Start</button>
     </form>
-    <div class="image-container" onclick="getCoordinates(event)">
-        <img src="./images/<%= image %>.jpeg" alt="gameCanvas">
+    <div class="image-container"
+    data-file='<%- JSON.stringify(file) %>'
+    onclick="getCoordinates(event, file)">
+        <img src="<%= file.path %>" alt="gameCanvas">
     </div>
 </body>
 </html>

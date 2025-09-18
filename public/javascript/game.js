@@ -8,6 +8,8 @@ const waldoCoordinates = {
     y2: 790 / 1440
 }
 
+const file = JSON.parse(imageContainer.dataset.file);
+
 async function getCoordinates(event) {
     const rect = event.target.getBoundingClientRect();
     const clickX = event.clientX - rect.left;
@@ -19,14 +21,15 @@ async function getCoordinates(event) {
     console.log(`Mouse click coordinates: X(${clickX}), Y(${clickY})`);
 
     if (
-        pctX >= waldoCoordinates.x1 && pctX <= waldoCoordinates.x2 &&
-        pctY >= waldoCoordinates.y1 && pctY <= waldoCoordinates.y2
+        pctX >= file.coords.x1 && pctX <= file.coords.x2 &&
+        pctY >= file.coords.y1 && pctY <= file.coords.y2
     ) {
         console.log("You found Waldo!");
-        await fetch("/game/end", {
+        const end = await fetch("/game/end", {
             method: "POST",
             headers: {"Content-Type": "application/json"}
-        });
+        })
+        .then(res => res.json());
     } else {
         console.log("Try again!");
     }
