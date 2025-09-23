@@ -13,6 +13,9 @@ const waldoCoordinates = {
 const file = JSON.parse(imageContainer.dataset.file);
 let pctX = 0;
 let pctY = 0;
+let roundCount = file.coords.length;
+let foundSet = new Set();
+
 
 async function getCoordinates(event) {
     const rect = event.target.getBoundingClientRect();
@@ -42,25 +45,45 @@ gameStart.addEventListener("click", async (e) => {
             headers: {"Content-Type": "application/json"}
         });
     imageContainer.style.display = "block";
+    imageContainer.style.pointerEvents = "auto";
 })
 
 menu.addEventListener("click", async (e) => {
     e.stopPropagation();
-    if (!e.target.dataset.choice) return;
+    const choice = e.target.dataset.choice?.toLowerCase();
+    if (!choice) return;
 
+    if (foundSet.has(choice)) return console.log(`Already found ${choice}`);
+    
+
+    const target = file.coords.find(c => c.name.toLowerCase() === choice);
+    if (!target) return console.log("Character not found in db");
+    
+    const { x1 ,x2, y1, y2 } = target.axis; 
     if (
-        pctX >= file.coords.x1 && pctX <= file.coords.x2 &&
-        pctY >= file.coords.y1 && pctY <= file.coords.y2
-        && e.target.dataset.choice === "waldo"
+        pctX >= x1 && pctX <= x2 &&
+        pctY >= y1 && pctY <= y2
     ) {
-        console.log("You found Waldo!");
-        const end = await fetch("/game/end", {
+        console.log(`You found ${choice}!`);
+        foundSet.add(choice);
+        if (foundSet.size === roundCount) {
+            imageContainer.style.pointerEvents = "none";
+            await fetch("/game/end", {
             method: "POST",
             headers: {"Content-Type": "application/json"}
-        })
-        .then(res => res.json());
+            })
+            .then(res => res.json())
+            .catch(err => console.error("Error ending game: ", err)
+            );
+        }
+
+        circle.style.display = "none";
+        menu.style.display = "none"; 
+        
     } else {
         console.log("Try again!");
+        circle.style.display = "none";
+        menu.style.display = "none";  
     }
 
 })

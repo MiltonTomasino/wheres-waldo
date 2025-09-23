@@ -18,7 +18,9 @@
         <img src="<%= file.path %>" alt="gameCanvas">
         <div class="selection-circle"></div>
         <div class="options-menu">
-            <button data-choice="waldo">waldo</button>
+            <% file.coords.forEach(element => { %>
+                <button data-choice="<%= element.name %>"><%= element.name %></button>
+            <% }); %>
         </div>
     </div>
 </body>

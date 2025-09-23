@@ -23,6 +23,8 @@ img {
     pointer-events: none;
     transform: translate(-50%, -50%);
     display: none;
+
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 .options-menu {
@@ -45,4 +47,8 @@ img {
     cursor: pointer;
 
     color: white;
+}
+
+.options-menu button:hover {
+    background-color: rgb(73, 73, 174)
 }
