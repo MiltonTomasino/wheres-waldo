@@ -32,7 +32,6 @@ img {
     background-color: darkblue;
     border: 1px solid #ccc;
     border-radius: 4px;
-    padding: 4px 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     display: none;
 }
@@ -41,7 +40,7 @@ img {
     display: block;
     background: none;
     border: none;
-    padding: 4px 0;
+    padding: 4px 8px;
     width: 100%;
     text-align: left;
     cursor: pointer;
@@ -51,4 +50,36 @@ img {
 
 .options-menu button:hover {
     background-color: rgb(73, 73, 174)
+}
+
+/*Modal*/
+
+.form-background {
+
+    display: none;
+
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.2);
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.record-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid gray;
+    background-color: white;
+    width: 50%;
+    height: 300px;
+    gap: 10px;
 }

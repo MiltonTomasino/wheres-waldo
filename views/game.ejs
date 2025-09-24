@@ -23,5 +23,20 @@
             <% }); %>
         </div>
     </div>
+    <div class="form-background">
+        <form action="/game/submit" method="POST" class="record-form">
+            <div class="record-info">
+                <label for="username">Username: </label>
+                <input type="text" name="username" id="username">
+                <input type="hidden" value="<%= file.id %>" name="file">
+            </div>
+
+            <div class="record-info">
+                <h1 class="totalTime"></h1>
+            </div>
+
+            <button type="submit">submit time</button>
+        </form>
+    </div>
 </body>
 </html>

@@ -2,6 +2,7 @@ const imageContainer = document.querySelector(".image-container");
 const gameStart = document.querySelector(".start-game");
 const menu = document.querySelector(".options-menu");
 const circle = document.querySelector(".selection-circle");
+const background = document.querySelector(".form-background");
 
 const waldoCoordinates = {
     x1: 1859 / 2560,
@@ -29,7 +30,7 @@ async function getCoordinates(event) {
 
     circle.style.left = `${x}px`;
     circle.style.top = `${y}px`;
-    menu.style.left = `${x + 40}px`;
+    menu.style.left = `${x + 20}px`;
     menu.style.top = `${y}px`;
     menu.style.display = "block";
 
@@ -68,15 +69,15 @@ menu.addEventListener("click", async (e) => {
         foundSet.add(choice);
         if (foundSet.size === roundCount) {
             imageContainer.style.pointerEvents = "none";
-            await fetch("/game/end", {
-            method: "POST",
-            headers: {"Content-Type": "application/json"}
+            const res = await fetch("/game/end", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"}
             })
-            .then(res => res.json())
-            .catch(err => console.error("Error ending game: ", err)
-            );
-        }
 
+            const { time } = await res.json();
+            document.querySelector(".totalTime").innerHTML = time;
+            background.style.display = "block";
+        }
         circle.style.display = "none";
         menu.style.display = "none"; 
         
