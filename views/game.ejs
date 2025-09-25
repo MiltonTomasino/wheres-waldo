@@ -27,7 +27,7 @@
         <form action="/game/submit" method="POST" class="record-form">
             <div class="record-info">
                 <label for="username">Username: </label>
-                <input type="text" name="username" id="username">
+                <input type="text" name="username" id="username" required>
                 <input type="hidden" value="<%= file.id %>" name="file">
             </div>
 
@@ -36,6 +36,7 @@
             </div>
 
             <button type="submit">submit time</button>
+            <button type="button" class="close-form">X</button>
         </form>
     </div>
 </body>

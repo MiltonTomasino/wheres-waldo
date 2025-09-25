@@ -3,6 +3,7 @@ const gameStart = document.querySelector(".start-game");
 const menu = document.querySelector(".options-menu");
 const circle = document.querySelector(".selection-circle");
 const background = document.querySelector(".form-background");
+const closeBtn = document.querySelector(".close-form");
 
 const waldoCoordinates = {
     x1: 1859 / 2560,
@@ -87,4 +88,9 @@ menu.addEventListener("click", async (e) => {
         menu.style.display = "none";  
     }
 
+});
+
+closeBtn.addEventListener("click", (e) => {
+    e.preventDefault
+    background.style.display = "none";
 })

@@ -83,3 +83,22 @@ img {
     height: 300px;
     gap: 10px;
 }
+
+.close-form {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    padding: 5px 10px;
+    border-radius: 50%;
+    border: none;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+.close-form:hover {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+}

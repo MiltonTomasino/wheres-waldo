@@ -13,7 +13,7 @@ module.exports.getGamePage = async (req, res) => {
         }
     });
 
-    console.log("Data: ", data);
+    // console.log("Data: ", data);
 
     const time = req.session.totalTime || "no time";
     
